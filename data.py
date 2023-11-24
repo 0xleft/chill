@@ -37,7 +37,7 @@ def get_info(object):
     }
 
 if __name__ == "__main__":
-    for _ in range(10000):
+    while True:
         id = random.randint(1, 1000000)
         data = get_data(id)
         try:
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         info = get_info(data['result']['data'][0])
         print(info)
 
-        if info['coords']['lat'] == 0 or info['coords']['long'] == 0:
+        if info['coords']['lat'] == None or info['coords']['long'] == None:
             continue
 
         # check if image already exists
