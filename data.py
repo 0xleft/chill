@@ -38,7 +38,7 @@ def get_info(object):
 
 if __name__ == "__main__":
     while True:
-        id = random.randint(1, 1000000)
+        id = random.randint(400000, 1000000)
         data = get_data(id)
         try:
             data['result']['data']
