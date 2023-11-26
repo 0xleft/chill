@@ -38,28 +38,32 @@ def get_info(object):
 
 if __name__ == "__main__":
     while True:
-        id = random.randint(400000, 1000000)
-        data = get_data(id)
         try:
-            data['result']['data']
+            id = random.randint(400000, 1000000)
+            data = get_data(id)
+            try:
+                data['result']['data']
+            except:
+                print(data)
+                continue
+            
+            info = get_info(data['result']['data'][0])
+            print(info)
+
+            if info['coords']['lat'] == None or info['coords']['long'] == None:
+                continue
+
+            # check if image already exists
+            if os.path.exists("data/" + str(id) + ".jpg"):
+                continue
+
+            threading.Thread(target=download_image, args=(info['image'], "data/" + str(id) + ".jpg")).start()
+            # write lat and long to file too
+            file = open("data/" + str(id) + ".txt", "w")
+            file.write(str(info['coords']['lat']) + "\n")
+            file.write(str(info['coords']['long']))
+            file.close()
+            print("Downloaded image " + str(id))
         except:
-            print(data)
+            print("Error downloading image " + str(id))
             continue
-           
-        info = get_info(data['result']['data'][0])
-        print(info)
-
-        if info['coords']['lat'] == None or info['coords']['long'] == None:
-            continue
-
-        # check if image already exists
-        if os.path.exists("data/" + str(id) + ".jpg"):
-            continue
-
-        threading.Thread(target=download_image, args=(info['image'], "data/" + str(id) + ".jpg")).start()
-        # write lat and long to file too
-        file = open("data/" + str(id) + ".txt", "w")
-        file.write(str(info['coords']['lat']) + "\n")
-        file.write(str(info['coords']['long']))
-        file.close()
-        print("Downloaded image " + str(id))
