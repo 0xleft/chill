@@ -5,9 +5,9 @@ This is an experiment to learn more about neural network architectures.
 ## Explore
 
 Feel free to explore:
-* [data transformation]("data.ipynb")
-* [experimental training]("training.ipynb")
-* [final model training]("training_count.ipynb")
+* [data transformation](data.ipynb)
+* [experimental training](training.ipynb)
+* [final model training](training_count.ipynb)
 
 ## Final
 
